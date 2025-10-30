@@ -91,22 +91,4 @@
 
 ## 如何运行
 
-每个实验目录（如 `MTL_Adapter/`）都是一个独立的模块，包含自己的运行脚本、模型定义和数据加载器。
-
-以 `MTL_Adapter` 实验为例：
-
-1.  **安装依赖**:
-    ```bash
-    pip install -r requirements.txt 
-    # 注意：根目录下可能需要一个总的 requirements.txt 文件，或者每个子目录有自己的依赖文件。
-    ```
-
-2.  **开始训练**:
-    进入特定实验的目录并运行其主脚本。
-    ```bash
-    # 运行基于 Adapter 的多任务学习模型
-    python MTL_Adapter/run_adapter_mtl.py
-    ```
-
-3.  **查看日志**:
-    训练过程中的日志和结果会保存在每个实验目录下的 `logs/` 子目录中。
+每个实验目录（如 `MTL_Adapter/`）都是一个独立的模块，如何运行请移步对应模块下的README.md文件
