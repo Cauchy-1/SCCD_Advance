@@ -1,8 +1,7 @@
-# 若有作者拿去改进了并发表论文，记得联系3052932946@qq.com署名，尊重成果！！
-
-# 中文网络欺凌检测项目 (SCCD)
+# 中文网络欺凌检测项目 (SCCD)改进
 
 本项目是围绕 “SCCD: A Session-based Dataset for Chinese Cyberbullying Detection” 数据集进行的一系列中文网络欺凌检测实验的集合。它包含了多种基于深度学习的模型实现，例如多任务学习、Adapter-tuning 等。
+
 
 ## 目录结构
 ~~~c E:\pythonCode\SCCD
