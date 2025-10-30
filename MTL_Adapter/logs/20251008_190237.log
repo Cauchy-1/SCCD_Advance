@@ -1,0 +1,38 @@
+2025-10-08 19:02:37,720 - adapter_mtl_logger - INFO - 使用设备: cuda
+2025-10-08 19:02:37,720 - adapter_mtl_logger - INFO - 激活的任务: ['label', 'expression', 'target']
+2025-10-08 19:02:37,720 - adapter_mtl_logger - INFO - 任务权重: {'label': 1.0, 'expression': 0.5, 'target': 0.5}
+2025-10-08 19:02:38,653 - adapter_mtl_logger - INFO - 
+正在准备数据集...
+2025-10-08 19:02:38,741 - adapter_mtl_logger - INFO - 数据集准备完成。
+2025-10-08 19:02:39,487 - adapter_mtl_logger - INFO - 总参数量: 107340878
+2025-10-08 19:02:39,488 - adapter_mtl_logger - INFO - 可训练参数量: 5073230 (4.73%)
+2025-10-08 19:02:39,488 - adapter_mtl_logger - INFO - --- Epoch 1/5 ---
+2025-10-08 19:11:36,535 - adapter_mtl_logger - INFO - Epoch 1 平均训练损失: 0.8459
+2025-10-08 19:12:39,195 - adapter_mtl_logger - INFO - --- Epoch 1 评估结果 ---
+2025-10-08 19:12:39,204 - adapter_mtl_logger - INFO - 任务: label        | Accuracy: 0.8369 | Macro-F1: 0.7927
+2025-10-08 19:12:39,208 - adapter_mtl_logger - INFO - 任务: expression   | Accuracy: 0.8813 | Macro-F1: 0.4713
+2025-10-08 19:12:39,211 - adapter_mtl_logger - INFO - 任务: target       | Accuracy: 0.7450 | Macro-F1: 0.7367
+2025-10-08 19:12:39,212 - adapter_mtl_logger - INFO - --- Epoch 2/5 ---
+2025-10-08 19:21:43,266 - adapter_mtl_logger - INFO - Epoch 2 平均训练损失: 0.7354
+2025-10-08 19:23:00,513 - adapter_mtl_logger - INFO - --- Epoch 2 评估结果 ---
+2025-10-08 19:23:00,529 - adapter_mtl_logger - INFO - 任务: label        | Accuracy: 0.8457 | Macro-F1: 0.7629
+2025-10-08 19:23:00,535 - adapter_mtl_logger - INFO - 任务: expression   | Accuracy: 0.8518 | Macro-F1: 0.5881
+2025-10-08 19:23:00,540 - adapter_mtl_logger - INFO - 任务: target       | Accuracy: 0.7576 | Macro-F1: 0.7478
+2025-10-08 19:23:00,541 - adapter_mtl_logger - INFO - --- Epoch 3/5 ---
+2025-10-08 19:32:22,060 - adapter_mtl_logger - INFO - Epoch 3 平均训练损失: 0.6817
+2025-10-08 19:33:37,847 - adapter_mtl_logger - INFO - --- Epoch 3 评估结果 ---
+2025-10-08 19:33:37,865 - adapter_mtl_logger - INFO - 任务: label        | Accuracy: 0.8551 | Macro-F1: 0.7887
+2025-10-08 19:33:37,871 - adapter_mtl_logger - INFO - 任务: expression   | Accuracy: 0.8790 | Macro-F1: 0.5495
+2025-10-08 19:33:37,877 - adapter_mtl_logger - INFO - 任务: target       | Accuracy: 0.7487 | Macro-F1: 0.7307
+2025-10-08 19:33:37,878 - adapter_mtl_logger - INFO - --- Epoch 4/5 ---
+2025-10-08 19:42:45,565 - adapter_mtl_logger - INFO - Epoch 4 平均训练损失: 0.6147
+2025-10-08 19:43:49,429 - adapter_mtl_logger - INFO - --- Epoch 4 评估结果 ---
+2025-10-08 19:43:49,438 - adapter_mtl_logger - INFO - 任务: label        | Accuracy: 0.8582 | Macro-F1: 0.7937
+2025-10-08 19:43:49,441 - adapter_mtl_logger - INFO - 任务: expression   | Accuracy: 0.8351 | Macro-F1: 0.6273
+2025-10-08 19:43:49,445 - adapter_mtl_logger - INFO - 任务: target       | Accuracy: 0.7572 | Macro-F1: 0.7524
+2025-10-08 19:43:49,446 - adapter_mtl_logger - INFO - --- Epoch 5/5 ---
+2025-10-08 19:52:49,690 - adapter_mtl_logger - INFO - Epoch 5 平均训练损失: 0.5546
+2025-10-08 19:53:52,075 - adapter_mtl_logger - INFO - --- Epoch 5 评估结果 ---
+2025-10-08 19:53:52,083 - adapter_mtl_logger - INFO - 任务: label        | Accuracy: 0.8605 | Macro-F1: 0.8067
+2025-10-08 19:53:52,086 - adapter_mtl_logger - INFO - 任务: expression   | Accuracy: 0.8633 | Macro-F1: 0.5760
+2025-10-08 19:53:52,089 - adapter_mtl_logger - INFO - 任务: target       | Accuracy: 0.7491 | Macro-F1: 0.7415

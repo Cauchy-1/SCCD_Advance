@@ -1,0 +1,144 @@
+2025-10-02 17:33:21,789 - multi_task_logger - INFO - 使用设备: cuda
+2025-10-02 17:33:21,790 - multi_task_logger - INFO - 训练文件: E:\pythonCode\SCCD\datas\SCCD\train.csv
+2025-10-02 17:33:21,790 - multi_task_logger - INFO - 测试文件: E:\pythonCode\SCCD\datas\SCCD\test.csv
+2025-10-02 17:33:23,334 - multi_task_logger - INFO - 
+正在准备数据集...
+2025-10-02 17:33:23,440 - multi_task_logger - INFO - 数据集准备完成。
+2025-10-02 17:33:24,049 - multi_task_logger - INFO - --- Epoch 1/3 ---
+2025-10-02 17:38:38,514 - multi_task_logger - INFO - Epoch 1 | 平均训练损失: 1.6533
+2025-10-02 17:39:15,514 - multi_task_logger - INFO - 
+--- 评估结果 ---
+2025-10-02 17:39:15,551 - multi_task_logger - INFO - 任务: label
+              precision    recall  f1-score   support
+
+      Non-CB       0.86      0.94      0.90      8748
+          CB       0.76      0.54      0.63      2941
+
+    accuracy                           0.84     11689
+   macro avg       0.81      0.74      0.77     11689
+weighted avg       0.83      0.84      0.83     11689
+
+2025-10-02 17:39:15,558 - multi_task_logger - INFO - 任务: expression
+              precision    recall  f1-score   support
+
+    Explicit       0.89      1.00      0.94      2592
+    Implicit       0.63      0.05      0.09       349
+
+    accuracy                           0.88      2941
+   macro avg       0.76      0.52      0.51      2941
+weighted avg       0.86      0.88      0.84      2941
+
+2025-10-02 17:39:15,562 - multi_task_logger - INFO - 任务: sarcasm
+              precision    recall  f1-score   support
+
+          No       0.86      1.00      0.92      2528
+         Yes       0.40      0.01      0.03       413
+
+    accuracy                           0.86      2941
+   macro avg       0.63      0.51      0.48      2941
+weighted avg       0.80      0.86      0.80      2941
+
+2025-10-02 17:39:15,566 - multi_task_logger - INFO - 任务: target
+              precision    recall  f1-score   support
+
+  Individual       0.78      0.82      0.80      1746
+       Group       0.72      0.67      0.69      1195
+
+    accuracy                           0.76      2941
+   macro avg       0.75      0.74      0.75      2941
+weighted avg       0.76      0.76      0.76      2941
+
+2025-10-02 17:39:15,566 - multi_task_logger - INFO - ---------------------
+
+2025-10-02 17:39:15,567 - multi_task_logger - INFO - --- Epoch 2/3 ---
+2025-10-02 17:44:33,938 - multi_task_logger - INFO - Epoch 2 | 平均训练损失: 1.2713
+2025-10-02 17:45:11,455 - multi_task_logger - INFO - 
+--- 评估结果 ---
+2025-10-02 17:45:11,460 - multi_task_logger - INFO - 任务: label
+              precision    recall  f1-score   support
+
+      Non-CB       0.87      0.94      0.91      8748
+          CB       0.77      0.59      0.67      2941
+
+    accuracy                           0.85     11689
+   macro avg       0.82      0.76      0.79     11689
+weighted avg       0.85      0.85      0.85     11689
+
+2025-10-02 17:45:11,465 - multi_task_logger - INFO - 任务: expression
+              precision    recall  f1-score   support
+
+    Explicit       0.92      0.91      0.92      2592
+    Implicit       0.38      0.40      0.39       349
+
+    accuracy                           0.85      2941
+   macro avg       0.65      0.66      0.65      2941
+weighted avg       0.85      0.85      0.85      2941
+
+2025-10-02 17:45:11,469 - multi_task_logger - INFO - 任务: sarcasm
+              precision    recall  f1-score   support
+
+          No       0.87      0.99      0.93      2528
+         Yes       0.60      0.11      0.19       413
+
+    accuracy                           0.87      2941
+   macro avg       0.74      0.55      0.56      2941
+weighted avg       0.83      0.87      0.82      2941
+
+2025-10-02 17:45:11,473 - multi_task_logger - INFO - 任务: target
+              precision    recall  f1-score   support
+
+  Individual       0.80      0.77      0.78      1746
+       Group       0.68      0.72      0.70      1195
+
+    accuracy                           0.75      2941
+   macro avg       0.74      0.74      0.74      2941
+weighted avg       0.75      0.75      0.75      2941
+
+2025-10-02 17:45:11,473 - multi_task_logger - INFO - ---------------------
+
+2025-10-02 17:45:11,474 - multi_task_logger - INFO - --- Epoch 3/3 ---
+2025-10-02 17:50:32,450 - multi_task_logger - INFO - Epoch 3 | 平均训练损失: 0.8962
+2025-10-02 17:51:10,210 - multi_task_logger - INFO - 
+--- 评估结果 ---
+2025-10-02 17:51:10,215 - multi_task_logger - INFO - 任务: label
+              precision    recall  f1-score   support
+
+      Non-CB       0.88      0.93      0.91      8748
+          CB       0.76      0.63      0.69      2941
+
+    accuracy                           0.86     11689
+   macro avg       0.82      0.78      0.80     11689
+weighted avg       0.85      0.86      0.85     11689
+
+2025-10-02 17:51:10,220 - multi_task_logger - INFO - 任务: expression
+              precision    recall  f1-score   support
+
+    Explicit       0.93      0.88      0.90      2592
+    Implicit       0.34      0.47      0.40       349
+
+    accuracy                           0.83      2941
+   macro avg       0.63      0.67      0.65      2941
+weighted avg       0.86      0.83      0.84      2941
+
+2025-10-02 17:51:10,225 - multi_task_logger - INFO - 任务: sarcasm
+              precision    recall  f1-score   support
+
+          No       0.89      0.96      0.92      2528
+         Yes       0.51      0.25      0.33       413
+
+    accuracy                           0.86      2941
+   macro avg       0.70      0.60      0.63      2941
+weighted avg       0.83      0.86      0.84      2941
+
+2025-10-02 17:51:10,229 - multi_task_logger - INFO - 任务: target
+              precision    recall  f1-score   support
+
+  Individual       0.80      0.77      0.79      1746
+       Group       0.68      0.72      0.70      1195
+
+    accuracy                           0.75      2941
+   macro avg       0.74      0.75      0.75      2941
+weighted avg       0.76      0.75      0.75      2941
+
+2025-10-02 17:51:10,229 - multi_task_logger - INFO - ---------------------
+

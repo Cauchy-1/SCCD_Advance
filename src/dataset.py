@@ -1,90 +1,131 @@
-# src/dataset.py
+# python
+import logging
+from typing import List, Dict, Tuple, Optional
 
+import numpy as np
 import pandas as pd
 import torch
 from torch.utils.data import Dataset
-from transformers import AutoTokenizer
-import re  # 导入正则表达式库
+
+try:
+    from gensim.models import KeyedVectors
+except Exception:
+    KeyedVectors = None
+
+
+def simple_zh_tokenize(text: str) -> List[str]:
+    # 简单中文分词：按字符切分并去除空白
+    if not isinstance(text, str):
+        text = str(text)
+    return [ch for ch in text.strip() if ch.strip() != '']
 
 
 class SCCDDataset(Dataset):
-    def __init__(self, data_path, split='train', model_name='hfl/chinese-roberta-wwm-ext', max_length=512,
-                 top_k_comments=5):
-        self.data_path = data_path
-        self.split = split
-        self.max_length = max_length
-        self.top_k_comments = top_k_comments
+    def __init__(
+        self,
+        csv_file: str,
+        comment_col: str = 'comment_content',
+        label_col: str = 'label',
+        vocab: Optional[Dict[str, int]] = None,
+        min_freq: int = 1,
+        tokenizer=simple_zh_tokenize
+    ):
+        # 读取数据
+        df = pd.read_csv(csv_file)
+        if comment_col not in df.columns or label_col not in df.columns:
+            raise ValueError(f'CSV缺少必要列: {comment_col} 或 {label_col}')
+        df = df[[comment_col, label_col]].dropna().reset_index(drop=True)
 
-        self.posts_df = pd.read_csv(f"{data_path}/posts.csv")
-        self.comments_df = pd.read_csv(f"{data_path}/comments.csv")
+        # 标签统一编码为整数
+        raw_labels = df[label_col].astype(str).values
+        unique_labels = sorted(list(set(raw_labels)))
+        self.label2id = {lb: i for i, lb in enumerate(unique_labels)}
+        self.id2label = {i: lb for lb, i in self.label2id.items()}
+        df['label_id'] = [self.label2id[lb] for lb in raw_labels]
+        self.num_labels = len(self.label2id)
 
-        self.posts_df['label_id'] = self.posts_df['label'].apply(lambda x: 1 if x == 'CB' else 0)
+        # 分词
+        self.tokenizer = tokenizer
+        df['tokens'] = df[comment_col].astype(str).map(self.tokenizer)
 
-        # 为了保证每次运行的训练集和测试集划分一致，我们设置一个固定的随机种子
-        shuffled_ids = self.posts_df['post_id'].unique()
-        # 使用 pandas 的 sample 功能来随机打乱，frac=1 表示全部抽取，random_state 保证可复现
-        shuffled_ids = pd.Series(shuffled_ids).sample(frac=1, random_state=42).tolist()
-
-        train_size = int(len(shuffled_ids) * 0.8)
-        if split == 'train':
-            self.session_ids = shuffled_ids[:train_size]
+        # 构建或使用现有词表
+        if vocab is None:
+            from collections import Counter
+            counter = Counter()
+            for toks in df['tokens']:
+                counter.update(toks)
+            stoi: Dict[str, int] = {'<pad>': 0, '<unk>': 1}
+            for tok, freq in counter.items():
+                if freq >= min_freq and tok not in stoi:
+                    stoi[tok] = len(stoi)
+            self.vocab = stoi
         else:
-            self.session_ids = shuffled_ids[train_size:]
+            self.vocab = vocab
 
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.unk_idx = self.vocab.get('<unk>', 1)
+        self.pad_idx = self.vocab.get('<pad>', 0)
 
-    def __len__(self):
-        return len(self.session_ids)
+        # 文本转ID序列
+        df['ids'] = df['tokens'].map(lambda toks: [self.vocab.get(t, self.unk_idx) for t in toks])
 
-    def _clean_text(self, text):
-        """
-        简单的文本清洗函数
-        - 移除URL
-        - 移除@提及
-        - 移除话题标签
-        - 移除大部分特殊符号
-        - 规范化空格
-        """
-        if not isinstance(text, str):
-            return ""
-        text = re.sub(r"http\S+|www\S+|https\S+", '', text, flags=re.MULTILINE)
-        text = re.sub(r'\@\w+', '', text)
-        text = re.sub(r'#\w+', '', text)
-        text = re.sub(r'[^\u4e00-\u9fa5a-zA-Z0-9\s]', '', text)
-        text = re.sub(r'\s+', ' ', text).strip()
-        return text
+        # 最终数据
+        self.data = df[[comment_col, 'ids', 'label_id']]
 
-    def __getitem__(self, idx):
-        post_id = self.session_ids[idx]
+    def __len__(self) -> int:
+        return len(self.data)
 
-        post_info = self.posts_df[self.posts_df['post_id'] == post_id].iloc[0]
-        # --- 关键修改：清洗帖子内容 ---
-        post_content = self._clean_text(post_info['post_content'])
-        label = post_info['label_id']
+    def __getitem__(self, idx: int) -> Tuple[List[int], int]:
+        row = self.data.iloc[idx]
+        token_ids = row['ids']
+        label_id = int(row['label_id'])
+        return token_ids, label_id
 
-        related_comments = self.comments_df[self.comments_df['post_id'] == post_id]
-        top_comments = related_comments.sort_values(by='like_num', ascending=False).head(self.top_k_comments)
+    def get_all_label_ids(self) -> np.ndarray:
+        return self.data['label_id'].values
 
-        context_text = post_content
-        for comment_text in top_comments['comment_content']:
-            # --- 关键修改：清洗评论内容 ---
-            cleaned_comment = self._clean_text(comment_text)
-            if cleaned_comment:  # 确保清洗后不为空
-                context_text += f" [SEP] {cleaned_comment}"
+    @property
+    def vocab_size(self) -> int:
+        return len(self.vocab)
 
-        encoding = self.tokenizer.encode_plus(
-            context_text,
-            add_special_tokens=True,
-            max_length=self.max_length,
-            padding='max_length',
-            truncation=True,
-            return_token_type_ids=False,
-            return_attention_mask=True,
-            return_tensors='pt',
-        )
 
-        return {
-            'input_ids': encoding['input_ids'].flatten(),
-            'attention_mask': encoding['attention_mask'].flatten(),
-            'labels': torch.tensor(label, dtype=torch.long)
-        }
+def generate_batch(batch, pad_idx: int, max_len: Optional[int] = None):
+    # 可选裁剪到max_len以降低显存与噪声
+    texts, labels = zip(*batch)  # texts: List[List[int]], labels: List[int]
+    if max_len is not None and max_len > 0:
+        texts = [x[:max_len] for x in texts]
+    max_len_batch = max(len(x) for x in texts) if texts else 0
+    padded = [x + [pad_idx] * (max_len_batch - len(x)) for x in texts]
+    return torch.tensor(padded, dtype=torch.long), torch.tensor(labels, dtype=torch.long)
+
+
+def load_pretrained_vectors(vector_path: str, vocab: Dict[str, int], embed_dim: int) -> Optional[torch.Tensor]:
+    if KeyedVectors is None:
+        logging.warning("gensim 未安装，跳过预训练词向量加载。")
+        return None
+    logging.info(f"loading projection weights from {vector_path}")
+    kv = KeyedVectors.load_word2vec_format(vector_path, binary=True)
+    if kv.vector_size != embed_dim:
+        logging.warning(f"预训练向量维度 {kv.vector_size} 与 embed_dim={embed_dim} 不一致。")
+        return None
+
+    mat = torch.empty(len(vocab), embed_dim, dtype=torch.float32)
+    torch.nn.init.normal_(mat, mean=0.0, std=0.1)
+
+    hit = 0
+    for tok, idx in vocab.items():
+        if tok in kv:
+            # 关键：拷贝为可写的numpy，再转tensor，避免只读数组警告
+            vec = np.array(kv[tok], copy=True)
+            mat[idx] = torch.from_numpy(vec).to(torch.float32)
+            hit += 1
+
+    # 可选稳定化：将<pad>/<unk>置零
+    pad_idx = vocab.get('<pad>', None)
+    unk_idx = vocab.get('<unk>', None)
+    if pad_idx is not None:
+        mat[pad_idx].zero_()
+    if unk_idx is not None:
+        mat[unk_idx].zero_()
+
+    logging.info(f"预训练覆盖词表: {hit}/{len(vocab)}")
+    return mat

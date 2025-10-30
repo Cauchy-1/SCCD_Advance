@@ -1,94 +1,75 @@
-# src/trainer.py
-
+# python
+# 文件：src/trainer.py —— 修改 evaluate，新增 macro/weighted 与逐类指标
+from typing import Dict, List
 import torch
-from torch.utils.data import DataLoader
-from torch.optim import AdamW
-from transformers import get_linear_schedule_with_warmup
-from tqdm import tqdm
-import torchmetrics
-
+from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 
 class Trainer:
-    def __init__(self, model, train_dataset, eval_dataset, learning_rate=2e-5, epochs=10, batch_size=16):
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.model = model.to(self.device)
-        self.train_dataset = train_dataset
-        self.eval_dataset = eval_dataset
-        self.epochs = epochs
-        self.batch_size = batch_size
+    def __init__(self, model, optimizer, device, scheduler=None, class_weights=None, clip_grad_norm: float = 0.0, label_smoothing: float = 0.0):
+        self.model = model
+        self.optimizer = optimizer
+        self.device = device
+        self.scheduler = scheduler
+        self.clip_grad_norm = float(clip_grad_norm or 0.0)
+        try:
+            self.criterion = torch.nn.CrossEntropyLoss(weight=class_weights, label_smoothing=float(label_smoothing or 0.0))
+        except TypeError:
+            self.criterion = torch.nn.CrossEntropyLoss(weight=class_weights)
 
-        self.train_dataloader = DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=True)
-        self.eval_dataloader = DataLoader(self.eval_dataset, batch_size=self.batch_size)
-
-        self.optimizer = AdamW(self.model.parameters(), lr=learning_rate)
-        total_steps = len(self.train_dataloader) * self.epochs
-        self.scheduler = get_linear_schedule_with_warmup(self.optimizer, num_warmup_steps=0,
-                                                         num_training_steps=total_steps)
-
-        # 训练指标
-        self.train_accuracy = torchmetrics.Accuracy(task="binary").to(self.device)
-
-        # --- 关键修改：为评估设置更全面的指标 ---
-        self.eval_metrics = torchmetrics.MetricCollection({
-            'accuracy': torchmetrics.Accuracy(task="binary"),
-            'precision': torchmetrics.Precision(task="binary"),
-            'recall': torchmetrics.Recall(task="binary"),
-            'f1_micro': torchmetrics.F1Score(task="binary", average='micro')
-        }).to(self.device)
-
-    def train_one_epoch(self, epoch):
+    def train_one_epoch(self, epoch: int, total_epochs: int, train_loader) -> float:
         self.model.train()
-        total_loss = 0
-        self.train_accuracy.reset()
-
-        progress_bar = tqdm(self.train_dataloader, desc=f"Epoch {epoch + 1}/{self.epochs} [Training]")
-        for batch in progress_bar:
-            self.optimizer.zero_grad()
-            input_ids = batch['input_ids'].to(self.device)
-            attention_mask = batch['attention_mask'].to(self.device)
-            labels = batch['labels'].to(self.device)
-
-            outputs = self.model(input_ids, attention_mask)
-            loss = torch.nn.CrossEntropyLoss()(outputs, labels)
-
+        running_loss, n_batches = 0.0, 0
+        for texts, labels in train_loader:
+            texts, labels = texts.to(self.device), labels.to(self.device)
+            logits = self.model(texts)
+            loss = self.criterion(logits, labels)
+            self.optimizer.zero_grad(set_to_none=True)
             loss.backward()
+            if self.clip_grad_norm > 0.0:
+                torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=self.clip_grad_norm)
             self.optimizer.step()
-            self.scheduler.step()
+            running_loss += loss.item(); n_batches += 1
+        return running_loss / max(1, n_batches)
 
-            total_loss += loss.item()
-            preds = torch.argmax(outputs, dim=1)
-            self.train_accuracy.update(preds, labels)
-            progress_bar.set_postfix({'loss': loss.item()})
-
-        avg_train_loss = total_loss / len(self.train_dataloader)
-        final_train_acc = self.train_accuracy.compute().item()
-        return avg_train_loss, final_train_acc
-
-    def evaluate(self, epoch):
+    @torch.no_grad()
+    def evaluate(self, data_loader) -> Dict[str, float]:
         self.model.eval()
-        total_loss = 0
-        # --- 关键修改：重置评估指标集合 ---
-        self.eval_metrics.reset()
+        all_preds: List[int] = []
+        all_labels: List[int] = []
+        for texts, labels in data_loader:
+            texts = texts.to(self.device)
+            logits = self.model(texts)
+            preds = torch.argmax(logits, dim=1).cpu()
+            all_preds.extend(preds.tolist())
+            all_labels.extend(labels.tolist())
 
-        progress_bar = tqdm(self.eval_dataloader, desc=f"Epoch {epoch + 1}/{self.epochs} [Evaluating]")
-        with torch.no_grad():
-            for batch in progress_bar:
-                input_ids = batch['input_ids'].to(self.device)
-                attention_mask = batch['attention_mask'].to(self.device)
-                labels = batch['labels'].to(self.device)
+        acc = accuracy_score(all_labels, all_preds)
 
-                outputs = self.model(input_ids, attention_mask)
-                loss = torch.nn.CrossEntropyLoss()(outputs, labels)
-                total_loss += loss.item()
+        p_micro, r_micro, f1_micro, _ = precision_recall_fscore_support(
+            all_labels, all_preds, average='micro', zero_division=0
+        )
+        p_macro, r_macro, f1_macro, _ = precision_recall_fscore_support(
+            all_labels, all_preds, average='macro', zero_division=0
+        )
+        p_w, r_w, f1_w, _ = precision_recall_fscore_support(
+            all_labels, all_preds, average='weighted', zero_division=0
+        )
+        # 逐类 F1 可用于定位不平衡类表现
+        _, _, f1_per_class, _ = precision_recall_fscore_support(
+            all_labels, all_preds, average=None, zero_division=0
+        )
 
-                preds = torch.argmax(outputs, dim=1)
-                # --- 关键修改：用评估指标集合更新状态 ---
-                self.eval_metrics.update(preds, labels)
-
-        avg_eval_loss = total_loss / len(self.eval_dataloader)
-        # --- 关键修改：计算所有评估指标并返回 ---
-        final_metrics = self.eval_metrics.compute()
-        # 将Tensor转换为标量值
-        final_metrics_scalar = {k: v.item() for k, v in final_metrics.items()}
-
-        return avg_eval_loss, final_metrics_scalar
+        return {
+            'accuracy': float(acc),
+            'precision_micro': float(p_micro),
+            'recall_micro': float(r_micro),
+            'f1_micro': float(f1_micro),
+            'precision_macro': float(p_macro),
+            'recall_macro': float(r_macro),
+            'f1_macro': float(f1_macro),
+            'precision_weighted': float(p_w),
+            'recall_weighted': float(r_w),
+            'f1_weighted': float(f1_w),
+            # 可选择性打印/记录
+            'f1_per_class_mean': float(f1_per_class.mean()),
+        }

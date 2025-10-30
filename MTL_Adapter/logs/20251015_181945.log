@@ -1,0 +1,113 @@
+2025-10-15 18:19:45,779 - adapter_mtl_logger - INFO - 使用设备: cuda
+2025-10-15 18:19:45,780 - adapter_mtl_logger - INFO - 激活的任务: ['label', 'expression', 'target']
+2025-10-15 18:19:45,780 - adapter_mtl_logger - INFO - 任务权重: {'label': 1.0, 'expression': 0.5, 'target': 0.5}
+2025-10-15 18:19:46,812 - adapter_mtl_logger - INFO - 
+正在准备数据集...
+2025-10-15 18:19:46,957 - adapter_mtl_logger - INFO - 数据集准备完成。
+2025-10-15 18:19:48,174 - adapter_mtl_logger - INFO - 总参数量: 107340878
+2025-10-15 18:19:48,174 - adapter_mtl_logger - INFO - 可训练参数量: 5073230 (4.73%)
+2025-10-15 18:19:48,176 - adapter_mtl_logger - INFO - --- Epoch 1/5 ---
+2025-10-15 18:30:45,961 - adapter_mtl_logger - INFO - 训练任务 'label' - Precision (Micro): 0.8117
+2025-10-15 18:30:45,990 - adapter_mtl_logger - INFO - 训练任务 'label' - Recall (Micro): 0.8117
+2025-10-15 18:30:45,990 - adapter_mtl_logger - INFO - 训练任务 'label' - F1 (Micro): 0.8117
+2025-10-15 18:30:46,016 - adapter_mtl_logger - INFO - 训练任务 'expression' - Precision (Micro): 0.8802
+2025-10-15 18:30:46,016 - adapter_mtl_logger - INFO - 训练任务 'expression' - Recall (Micro): 0.8802
+2025-10-15 18:30:46,016 - adapter_mtl_logger - INFO - 训练任务 'expression' - F1 (Micro): 0.8802
+2025-10-15 18:30:46,037 - adapter_mtl_logger - INFO - 训练任务 'target' - Precision (Micro): 0.6962
+2025-10-15 18:30:46,037 - adapter_mtl_logger - INFO - 训练任务 'target' - Recall (Micro): 0.6962
+2025-10-15 18:30:46,037 - adapter_mtl_logger - INFO - 训练任务 'target' - F1 (Micro): 0.6962
+2025-10-15 18:30:46,039 - adapter_mtl_logger - INFO - Epoch 1 平均训练损失: 0.8670
+2025-10-15 18:33:10,869 - adapter_mtl_logger - INFO - Epoch 1 平均评估损失: 0.7991
+2025-10-15 18:33:10,906 - adapter_mtl_logger - INFO - 评估任务 'label' - Precision (Micro): 0.8397
+2025-10-15 18:33:10,906 - adapter_mtl_logger - INFO - 评估任务 'label' - Recall (Micro): 0.8397
+2025-10-15 18:33:10,907 - adapter_mtl_logger - INFO - 评估任务 'label' - F1 (Micro): 0.8397
+2025-10-15 18:33:10,920 - adapter_mtl_logger - INFO - 评估任务 'expression' - Precision (Micro): 0.8800
+2025-10-15 18:33:10,920 - adapter_mtl_logger - INFO - 评估任务 'expression' - Recall (Micro): 0.8800
+2025-10-15 18:33:10,920 - adapter_mtl_logger - INFO - 评估任务 'expression' - F1 (Micro): 0.8800
+2025-10-15 18:33:10,933 - adapter_mtl_logger - INFO - 评估任务 'target' - Precision (Micro): 0.7307
+2025-10-15 18:33:10,933 - adapter_mtl_logger - INFO - 评估任务 'target' - Recall (Micro): 0.7307
+2025-10-15 18:33:10,934 - adapter_mtl_logger - INFO - 评估任务 'target' - F1 (Micro): 0.7307
+2025-10-15 18:33:10,934 - adapter_mtl_logger - INFO - --- Epoch 2/5 ---
+2025-10-15 18:44:17,274 - adapter_mtl_logger - INFO - 训练任务 'label' - Precision (Micro): 0.8401
+2025-10-15 18:44:17,275 - adapter_mtl_logger - INFO - 训练任务 'label' - Recall (Micro): 0.8401
+2025-10-15 18:44:17,275 - adapter_mtl_logger - INFO - 训练任务 'label' - F1 (Micro): 0.8401
+2025-10-15 18:44:17,295 - adapter_mtl_logger - INFO - 训练任务 'expression' - Precision (Micro): 0.8821
+2025-10-15 18:44:17,296 - adapter_mtl_logger - INFO - 训练任务 'expression' - Recall (Micro): 0.8821
+2025-10-15 18:44:17,296 - adapter_mtl_logger - INFO - 训练任务 'expression' - F1 (Micro): 0.8821
+2025-10-15 18:44:17,321 - adapter_mtl_logger - INFO - 训练任务 'target' - Precision (Micro): 0.7463
+2025-10-15 18:44:17,321 - adapter_mtl_logger - INFO - 训练任务 'target' - Recall (Micro): 0.7463
+2025-10-15 18:44:17,322 - adapter_mtl_logger - INFO - 训练任务 'target' - F1 (Micro): 0.7463
+2025-10-15 18:44:17,324 - adapter_mtl_logger - INFO - Epoch 2 平均训练损失: 0.7767
+2025-10-15 18:46:41,068 - adapter_mtl_logger - INFO - Epoch 2 平均评估损失: 0.7974
+2025-10-15 18:46:41,102 - adapter_mtl_logger - INFO - 评估任务 'label' - Precision (Micro): 0.8447
+2025-10-15 18:46:41,102 - adapter_mtl_logger - INFO - 评估任务 'label' - Recall (Micro): 0.8447
+2025-10-15 18:46:41,103 - adapter_mtl_logger - INFO - 评估任务 'label' - F1 (Micro): 0.8447
+2025-10-15 18:46:41,114 - adapter_mtl_logger - INFO - 评估任务 'expression' - Precision (Micro): 0.8824
+2025-10-15 18:46:41,114 - adapter_mtl_logger - INFO - 评估任务 'expression' - Recall (Micro): 0.8824
+2025-10-15 18:46:41,114 - adapter_mtl_logger - INFO - 评估任务 'expression' - F1 (Micro): 0.8824
+2025-10-15 18:46:41,127 - adapter_mtl_logger - INFO - 评估任务 'target' - Precision (Micro): 0.7361
+2025-10-15 18:46:41,127 - adapter_mtl_logger - INFO - 评估任务 'target' - Recall (Micro): 0.7361
+2025-10-15 18:46:41,127 - adapter_mtl_logger - INFO - 评估任务 'target' - F1 (Micro): 0.7361
+2025-10-15 18:46:41,128 - adapter_mtl_logger - INFO - --- Epoch 3/5 ---
+2025-10-15 18:57:29,675 - adapter_mtl_logger - INFO - 训练任务 'label' - Precision (Micro): 0.8500
+2025-10-15 18:57:29,675 - adapter_mtl_logger - INFO - 训练任务 'label' - Recall (Micro): 0.8500
+2025-10-15 18:57:29,675 - adapter_mtl_logger - INFO - 训练任务 'label' - F1 (Micro): 0.8500
+2025-10-15 18:57:29,695 - adapter_mtl_logger - INFO - 训练任务 'expression' - Precision (Micro): 0.8839
+2025-10-15 18:57:29,695 - adapter_mtl_logger - INFO - 训练任务 'expression' - Recall (Micro): 0.8839
+2025-10-15 18:57:29,695 - adapter_mtl_logger - INFO - 训练任务 'expression' - F1 (Micro): 0.8839
+2025-10-15 18:57:29,721 - adapter_mtl_logger - INFO - 训练任务 'target' - Precision (Micro): 0.7689
+2025-10-15 18:57:29,721 - adapter_mtl_logger - INFO - 训练任务 'target' - Recall (Micro): 0.7689
+2025-10-15 18:57:29,721 - adapter_mtl_logger - INFO - 训练任务 'target' - F1 (Micro): 0.7689
+2025-10-15 18:57:29,724 - adapter_mtl_logger - INFO - Epoch 3 平均训练损失: 0.7297
+2025-10-15 18:59:55,161 - adapter_mtl_logger - INFO - Epoch 3 平均评估损失: 0.7908
+2025-10-15 18:59:55,200 - adapter_mtl_logger - INFO - 评估任务 'label' - Precision (Micro): 0.8491
+2025-10-15 18:59:55,200 - adapter_mtl_logger - INFO - 评估任务 'label' - Recall (Micro): 0.8491
+2025-10-15 18:59:55,200 - adapter_mtl_logger - INFO - 评估任务 'label' - F1 (Micro): 0.8491
+2025-10-15 18:59:55,214 - adapter_mtl_logger - INFO - 评估任务 'expression' - Precision (Micro): 0.8783
+2025-10-15 18:59:55,214 - adapter_mtl_logger - INFO - 评估任务 'expression' - Recall (Micro): 0.8783
+2025-10-15 18:59:55,214 - adapter_mtl_logger - INFO - 评估任务 'expression' - F1 (Micro): 0.8783
+2025-10-15 18:59:55,231 - adapter_mtl_logger - INFO - 评估任务 'target' - Precision (Micro): 0.7474
+2025-10-15 18:59:55,231 - adapter_mtl_logger - INFO - 评估任务 'target' - Recall (Micro): 0.7474
+2025-10-15 18:59:55,231 - adapter_mtl_logger - INFO - 评估任务 'target' - F1 (Micro): 0.7474
+2025-10-15 18:59:55,232 - adapter_mtl_logger - INFO - --- Epoch 4/5 ---
+2025-10-15 19:10:47,447 - adapter_mtl_logger - INFO - 训练任务 'label' - Precision (Micro): 0.8567
+2025-10-15 19:10:47,448 - adapter_mtl_logger - INFO - 训练任务 'label' - Recall (Micro): 0.8567
+2025-10-15 19:10:47,448 - adapter_mtl_logger - INFO - 训练任务 'label' - F1 (Micro): 0.8567
+2025-10-15 19:10:47,464 - adapter_mtl_logger - INFO - 训练任务 'expression' - Precision (Micro): 0.8888
+2025-10-15 19:10:47,464 - adapter_mtl_logger - INFO - 训练任务 'expression' - Recall (Micro): 0.8888
+2025-10-15 19:10:47,464 - adapter_mtl_logger - INFO - 训练任务 'expression' - F1 (Micro): 0.8888
+2025-10-15 19:10:47,490 - adapter_mtl_logger - INFO - 训练任务 'target' - Precision (Micro): 0.7803
+2025-10-15 19:10:47,490 - adapter_mtl_logger - INFO - 训练任务 'target' - Recall (Micro): 0.7803
+2025-10-15 19:10:47,490 - adapter_mtl_logger - INFO - 训练任务 'target' - F1 (Micro): 0.7803
+2025-10-15 19:10:47,492 - adapter_mtl_logger - INFO - Epoch 4 平均训练损失: 0.7055
+2025-10-15 19:13:06,185 - adapter_mtl_logger - INFO - Epoch 4 平均评估损失: 0.7741
+2025-10-15 19:13:06,206 - adapter_mtl_logger - INFO - 评估任务 'label' - Precision (Micro): 0.8539
+2025-10-15 19:13:06,206 - adapter_mtl_logger - INFO - 评估任务 'label' - Recall (Micro): 0.8539
+2025-10-15 19:13:06,206 - adapter_mtl_logger - INFO - 评估任务 'label' - F1 (Micro): 0.8539
+2025-10-15 19:13:06,214 - adapter_mtl_logger - INFO - 评估任务 'expression' - Precision (Micro): 0.8803
+2025-10-15 19:13:06,214 - adapter_mtl_logger - INFO - 评估任务 'expression' - Recall (Micro): 0.8803
+2025-10-15 19:13:06,215 - adapter_mtl_logger - INFO - 评估任务 'expression' - F1 (Micro): 0.8803
+2025-10-15 19:13:06,223 - adapter_mtl_logger - INFO - 评估任务 'target' - Precision (Micro): 0.7480
+2025-10-15 19:13:06,223 - adapter_mtl_logger - INFO - 评估任务 'target' - Recall (Micro): 0.7480
+2025-10-15 19:13:06,223 - adapter_mtl_logger - INFO - 评估任务 'target' - F1 (Micro): 0.7480
+2025-10-15 19:13:06,223 - adapter_mtl_logger - INFO - --- Epoch 5/5 ---
+2025-10-15 19:23:29,058 - adapter_mtl_logger - INFO - 训练任务 'label' - Precision (Micro): 0.8640
+2025-10-15 19:23:29,058 - adapter_mtl_logger - INFO - 训练任务 'label' - Recall (Micro): 0.8640
+2025-10-15 19:23:29,059 - adapter_mtl_logger - INFO - 训练任务 'label' - F1 (Micro): 0.8640
+2025-10-15 19:23:29,088 - adapter_mtl_logger - INFO - 训练任务 'expression' - Precision (Micro): 0.8947
+2025-10-15 19:23:29,088 - adapter_mtl_logger - INFO - 训练任务 'expression' - Recall (Micro): 0.8947
+2025-10-15 19:23:29,088 - adapter_mtl_logger - INFO - 训练任务 'expression' - F1 (Micro): 0.8947
+2025-10-15 19:23:29,117 - adapter_mtl_logger - INFO - 训练任务 'target' - Precision (Micro): 0.7918
+2025-10-15 19:23:29,117 - adapter_mtl_logger - INFO - 训练任务 'target' - Recall (Micro): 0.7918
+2025-10-15 19:23:29,117 - adapter_mtl_logger - INFO - 训练任务 'target' - F1 (Micro): 0.7918
+2025-10-15 19:23:29,119 - adapter_mtl_logger - INFO - Epoch 5 平均训练损失: 0.6722
+2025-10-15 19:26:04,037 - adapter_mtl_logger - INFO - Epoch 5 平均评估损失: 0.7901
+2025-10-15 19:26:04,081 - adapter_mtl_logger - INFO - 评估任务 'label' - Precision (Micro): 0.8564
+2025-10-15 19:26:04,081 - adapter_mtl_logger - INFO - 评估任务 'label' - Recall (Micro): 0.8564
+2025-10-15 19:26:04,081 - adapter_mtl_logger - INFO - 评估任务 'label' - F1 (Micro): 0.8564
+2025-10-15 19:26:04,093 - adapter_mtl_logger - INFO - 评估任务 'expression' - Precision (Micro): 0.8803
+2025-10-15 19:26:04,093 - adapter_mtl_logger - INFO - 评估任务 'expression' - Recall (Micro): 0.8803
+2025-10-15 19:26:04,093 - adapter_mtl_logger - INFO - 评估任务 'expression' - F1 (Micro): 0.8803
+2025-10-15 19:26:04,108 - adapter_mtl_logger - INFO - 评估任务 'target' - Precision (Micro): 0.7548
+2025-10-15 19:26:04,108 - adapter_mtl_logger - INFO - 评估任务 'target' - Recall (Micro): 0.7548
+2025-10-15 19:26:04,108 - adapter_mtl_logger - INFO - 评估任务 'target' - F1 (Micro): 0.7548

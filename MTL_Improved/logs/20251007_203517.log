@@ -1,0 +1,114 @@
+2025-10-07 20:35:17,541 - improved_mtl_logger - INFO - 使用设备: cuda
+2025-10-07 20:35:17,541 - improved_mtl_logger - INFO - 激活的任务: ['label', 'expression', 'target']
+2025-10-07 20:35:17,541 - improved_mtl_logger - INFO - 任务权重: {'label': 1.0, 'expression': 0.2, 'target': 0.2}
+2025-10-07 20:35:19,088 - improved_mtl_logger - INFO - 
+正在准备数据集...
+2025-10-07 20:35:19,175 - improved_mtl_logger - INFO - 数据集准备完成。
+2025-10-07 20:35:19,510 - improved_mtl_logger - INFO - --- Epoch 1/3 ---
+2025-10-07 20:40:41,852 - improved_mtl_logger - INFO - Epoch 1 | 平均加权训练损失: 0.5488
+2025-10-07 20:41:18,534 - improved_mtl_logger - INFO - 
+--- 评估结果 ---
+2025-10-07 20:41:18,568 - improved_mtl_logger - INFO - 任务: label
+              precision    recall  f1-score   support
+
+      Non-CB       0.88      0.94      0.91      8748
+          CB       0.77      0.63      0.70      2941
+
+    accuracy                           0.86     11689
+   macro avg       0.83      0.79      0.80     11689
+weighted avg       0.86      0.86      0.86     11689
+
+2025-10-07 20:41:18,573 - improved_mtl_logger - INFO - 任务: expression
+              precision    recall  f1-score   support
+
+    Explicit       0.88      1.00      0.94      2592
+    Implicit       0.75      0.02      0.03       349
+
+    accuracy                           0.88      2941
+   macro avg       0.82      0.51      0.49      2941
+weighted avg       0.87      0.88      0.83      2941
+
+2025-10-07 20:41:18,577 - improved_mtl_logger - INFO - 任务: target
+              precision    recall  f1-score   support
+
+  Individual       0.76      0.83      0.80      1746
+       Group       0.72      0.62      0.67      1195
+
+    accuracy                           0.75      2941
+   macro avg       0.74      0.73      0.73      2941
+weighted avg       0.75      0.75      0.74      2941
+
+2025-10-07 20:41:18,577 - improved_mtl_logger - INFO - ---------------------
+
+2025-10-07 20:41:18,577 - improved_mtl_logger - INFO - --- Epoch 2/3 ---
+2025-10-07 20:46:34,302 - improved_mtl_logger - INFO - Epoch 2 | 平均加权训练损失: 0.3844
+2025-10-07 20:47:10,738 - improved_mtl_logger - INFO - 
+--- 评估结果 ---
+2025-10-07 20:47:10,743 - improved_mtl_logger - INFO - 任务: label
+              precision    recall  f1-score   support
+
+      Non-CB       0.88      0.94      0.91      8748
+          CB       0.78      0.63      0.70      2941
+
+    accuracy                           0.86     11689
+   macro avg       0.83      0.79      0.80     11689
+weighted avg       0.86      0.86      0.86     11689
+
+2025-10-07 20:47:10,747 - improved_mtl_logger - INFO - 任务: expression
+              precision    recall  f1-score   support
+
+    Explicit       0.91      0.93      0.92      2592
+    Implicit       0.37      0.32      0.34       349
+
+    accuracy                           0.85      2941
+   macro avg       0.64      0.62      0.63      2941
+weighted avg       0.85      0.85      0.85      2941
+
+2025-10-07 20:47:10,751 - improved_mtl_logger - INFO - 任务: target
+              precision    recall  f1-score   support
+
+  Individual       0.79      0.83      0.81      1746
+       Group       0.72      0.67      0.70      1195
+
+    accuracy                           0.76      2941
+   macro avg       0.76      0.75      0.75      2941
+weighted avg       0.76      0.76      0.76      2941
+
+2025-10-07 20:47:10,751 - improved_mtl_logger - INFO - ---------------------
+
+2025-10-07 20:47:10,752 - improved_mtl_logger - INFO - --- Epoch 3/3 ---
+2025-10-07 20:52:27,661 - improved_mtl_logger - INFO - Epoch 3 | 平均加权训练损失: 0.2575
+2025-10-07 20:53:03,914 - improved_mtl_logger - INFO - 
+--- 评估结果 ---
+2025-10-07 20:53:03,919 - improved_mtl_logger - INFO - 任务: label
+              precision    recall  f1-score   support
+
+      Non-CB       0.89      0.93      0.91      8748
+          CB       0.76      0.67      0.71      2941
+
+    accuracy                           0.86     11689
+   macro avg       0.82      0.80      0.81     11689
+weighted avg       0.86      0.86      0.86     11689
+
+2025-10-07 20:53:03,923 - improved_mtl_logger - INFO - 任务: expression
+              precision    recall  f1-score   support
+
+    Explicit       0.93      0.85      0.89      2592
+    Implicit       0.31      0.52      0.39       349
+
+    accuracy                           0.81      2941
+   macro avg       0.62      0.68      0.64      2941
+weighted avg       0.86      0.81      0.83      2941
+
+2025-10-07 20:53:03,928 - improved_mtl_logger - INFO - 任务: target
+              precision    recall  f1-score   support
+
+  Individual       0.79      0.81      0.80      1746
+       Group       0.71      0.69      0.70      1195
+
+    accuracy                           0.76      2941
+   macro avg       0.75      0.75      0.75      2941
+weighted avg       0.76      0.76      0.76      2941
+
+2025-10-07 20:53:03,928 - improved_mtl_logger - INFO - ---------------------
+
